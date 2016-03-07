@@ -1,0 +1,51 @@
+---
+title: "linkomm"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+v.group = unique(all_adm_gr$all_members) 
+v.group2 = unique(init_groups_all$all_members)
+m = matrix(0, nrow = 311687, ncol = 108141)
+rownames(m) = v.group
+colnames(m) = v.group2
+for (i in v.group) {
+  a = subset(all_ist_gr, group_id == i)
+  a = a$all_members
+  for (j in v.group2) {
+    b = subset(init_groups_all, group_id == j)
+    b = b$all_members
+    m[c(as.character(i)),c(as.character(j))] = length(intersect(a,b))/length(unique(c(a)))
+  }
+}
+```
+
+a <- all_adm_gr[1:1000,]
+b <- init_groups_all[1:1000,]
+m = matrix(0, nrow = 1000, ncol = 1000)
+v.group = unique(a$all_members)
+v.group2 = unique(b$all_members)
+colnames(m) = v.group2
+rownames(m) = v.group
+for (i in v.group) {
+c = subset(a, all_members == i)
+c = a$all_members
+for (j in v.group2) {
+d = subset(b, all_members == j)
+d = b$all_members
+m[c(as.character(i)),c(as.character(j))] = length(intersect(c,d))/length(unique(c(c)))
+}
+}
+
+
+
+for (i in v.group) {
+  a = subset(all_ist_gr, group_id == i)
+  a = a$all_members
+  for (j in v.group2) {
+    b = subset(init_groups_all, group_id == j)
+    b = b$all_members
+    m[c(as.character(i)),c(as.character(j))] = length(intersect(a,b))/length(unique(c(a)))
+  }
+}
+
